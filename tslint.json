@@ -1,0 +1,29 @@
+{
+  "defaultSeverity": "error",
+  "extends": ["tslint:recommended", "tslint-config-prettier"],
+  "jsRules": {
+    "no-unused-expression": true
+  },
+  "rules": {
+    "member-access": [true],
+    "ordered-imports": [false],
+    "member-ordering": [false],
+    "interface-name": [false],
+    "arrow-parens": false,
+    "object-literal-sort-keys": false,
+    "no-console": true,
+    "newline-before-return": true,
+    "no-return-await": true,
+    "no-async-without-await": true,
+    "no-duplicate-imports": [true, { "allow-namespace-imports": true }],
+    "unnecessary-else": true,
+    "typedef": [true, "call-signature", "array-destructuring", "property-declaration", "member-variable-declaration", "parameter"],
+    "arrow-return-shorthand": true,
+    "variable-name": [
+      true,
+      "allow-pascal-case",
+      "allow-snake-case",
+      "allow-leading-underscore"
+    ]
+  }
+}

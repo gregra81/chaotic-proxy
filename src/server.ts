@@ -1,18 +1,21 @@
+import * as dotenv from 'dotenv';
+dotenv.config();
+
 import * as express from 'express';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import * as ChaoticResponse from 'connect-chaotic-response';
 import config from './config';
 
 const app = express();
+app.disable('x-powered-by');
 
-// Create a new chaoticResponse, optionaly with options
-const chaoticResponse = new ChaoticResponse(config.chaotic);
+const chaoticResponse = new ChaoticResponse( { chaotic: { mode: config.proxy.chaosMode }} );
 
 const proxyOptions = {
-  target: 'https://developer.api.autodesk.com/',
+  target: config.proxy.target,
   changeOrigin: true,
   pathRewrite: {
-    '^/proxy/schedule': '/construction/schedule', // remove base path
+    '^/proxy/': '/', // remove base path
   },
   onProxyReq: (_proxyReq, req: express.Request, _res) => {
     const log = {
@@ -26,7 +29,7 @@ const proxyOptions = {
   }
 };
 
-app.use(chaoticResponse.middleware); // this middleware should be first!
+app.use(chaoticResponse.middleware); // chaotic middleware should be first!
 
 // Proxy
 app.use('/proxy', createProxyMiddleware(proxyOptions));

@@ -1,6 +1,9 @@
 export default {
   server: {
-    port: 5000,
+    port: process.env.SERVER_PORT ?? 5000,
   },
-  chaotic: { mode: 'timeout' },
+  proxy: {
+    target: process.env.PROXY_TARGET,
+    chaosMode: process.env.PROXY_CHAOS_MODE ?? 'optimistic'
+  }
 };

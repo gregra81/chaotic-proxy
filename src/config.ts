@@ -4,6 +4,6 @@ export default {
   },
   proxy: {
     target: process.env.PROXY_TARGET,
-    chaosMode: process.env.PROXY_CHAOS_MODE ?? 'optimistic'
-  }
+    chaosMode: process.env.PROXY_CHAOS_MODE ?? 'optimistic',
+  },
 };

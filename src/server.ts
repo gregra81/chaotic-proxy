@@ -9,7 +9,7 @@ import config from './config';
 const app = express();
 app.disable('x-powered-by');
 
-const chaoticResponse = new ChaoticResponse( { chaotic: { mode: config.proxy.chaosMode }} );
+const chaoticResponse = new ChaoticResponse({ chaotic: { mode: config.proxy.chaosMode } });
 
 const proxyOptions = {
   target: config.proxy.target,
@@ -17,16 +17,16 @@ const proxyOptions = {
   pathRewrite: {
     '^/proxy/': '/', // remove base path
   },
-  onProxyReq: (_proxyReq, req: express.Request, _res) => {
+  onProxyReq: (_proxyReq, req: express.Request) => {
     const log = {
       url: req.url,
       method: req.method,
       headers: req.headers,
       body: req.body,
-      query: req.query
+      query: req.query,
     };
     console.log(log);
-  }
+  },
 };
 
 app.use(chaoticResponse.middleware); // chaotic middleware should be first!
